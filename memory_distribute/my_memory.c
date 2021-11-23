@@ -14,6 +14,16 @@ void memory_init(){
     p->next = NULL;
     head->next = p;
 }
+void memory_trunc(){
+    struct free_partition *p = head, *q = head->next;
+    while (q) {
+        free(p);
+        p = q;
+        q = q->next;
+    }
+    free(p);
+}
+
 int allocate_first(int size){
     struct free_partition *p = head, *q = head->next;
     int index;

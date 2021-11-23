@@ -16,6 +16,7 @@ struct free_partition{
 struct free_partition* head;
 
 void memory_init();
+void memory_trunc();
 int allocate_first(int size);
 bool release_first(int index, int size);
 int allocate_best(int size);

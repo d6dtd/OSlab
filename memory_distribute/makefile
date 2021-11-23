@@ -4,15 +4,15 @@ CC = gcc
 CFLAGS = -c
 LD = gcc
 LIB = -I ../include/
-OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/disk.o
+OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/my_memory.o
 
 $(BUILD_DIR)/main.o: main.c
 	$(CC) $(CFLAGS) $(LIB) $< -o $@
 	
-$(BUILD_DIR)/disk.o: disk.c
+$(BUILD_DIR)/my_memory.o: my_memory.c
 	$(CC) $(CFLAGS) $(LIB) $< -o $@
 	
-$(BUILD_DIR)/schedule: $(OBJS)
+$(BUILD_DIR)/allocate: $(OBJS)
 	$(LD) $^ -o $@
 	
 .PHONY : mk_dir clean all

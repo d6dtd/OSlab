@@ -16,8 +16,8 @@ void f(int (*schedule)() ) {
 
     req[0] = rand() % count + 1;
     request(req[0]);
-    printf("����ִ�У�%d\n", req[0]);
-    printf("����    ");
+    printf("正在运行：%d\n", req[0]);
+    printf("请求：   ");
     for (int i = 1; i < REQ_COUNT; ++i) {
         req[i] = (rand() % count + 1);
         request(req[i]);
@@ -27,24 +27,24 @@ void f(int (*schedule)() ) {
 
     int pre_now = FCFS();
     int res = 0;
-    printf("��ͷ�ƶ�˳��(%d) ", pre_now);
+    printf("执行顺序：(%d) ", pre_now);
     for (int i = 1; i < REQ_COUNT; ++i) {
         int now = schedule();
         printf("%d ", now);
         res += ABS(now - pre_now);
         pre_now = now;
     }
-    printf("\nƽ���ƶ��ŵ���%0.2f\n\n", (float )res / REQ_COUNT);
+    printf("\n平均移动磁道数%0.2f\n\n", (float )res / REQ_COUNT);
     disk_trunc();
 }
 
 int main() {
-    printf("�����ȷ����㷨��\n");
+    printf("先来先服务算法\n");
     f(FCFS);
-    printf("���Ѱ��ʱ�������㷨��\n");
+    printf("最短寻道时间优先算法\n");
     f(SSTF);
-    printf("ɨ���㷨��\n");
+    printf("扫描算法\n");
     f(SCAN);
-    printf("ѭ��ɨ���㷨��\n");
+    printf("循环扫描算法\n");
     f(CSCAN);
 }
