@@ -12,17 +12,17 @@ $(BUILD_DIR)/main.o: main.c
 $(BUILD_DIR)/my_memory.o: my_memory.c
 	$(CC) $(CFLAGS) $(LIB) $< -o $@
 	
-$(BUILD_DIR)/allocate: $(OBJS)
+allocate: $(OBJS)
 	$(LD) $^ -o $@
 	
 .PHONY : mk_dir clean all
 
 mk_dir:
-		if[ ! -d $(BUILD_DIR) ]; then mkdir $(BUILD_DIR); fi
+		if [ ! -d $(BUILD_DIR) ]; then mkdir $(BUILD_DIR); fi
 		
 clean:
 		rm -rf $(BUILD_DIR)
 		
-build: $(BUILD_DIR)/schedule
+build: allocate
 
 all: mk_dir build

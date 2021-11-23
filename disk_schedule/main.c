@@ -8,12 +8,12 @@
 
 int req[REQ_COUNT];
 int count = 100;
-
+int seed = 0;
 //int (*schedule)();
 
-void f(int (*schedule)() ) {
+void f(int (*schedule)()) {
     disk_init(count);
-
+	srand(seed);
     req[0] = rand() % count + 1;
     request(req[0]);
     printf("正在运行：%d\n", req[0]);
@@ -38,7 +38,10 @@ void f(int (*schedule)() ) {
     disk_trunc();
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+	if(argc == 2){
+		seed = argv[1][0]-'0';
+	}
     printf("先来先服务算法\n");
     f(FCFS);
     printf("最短寻道时间优先算法\n");

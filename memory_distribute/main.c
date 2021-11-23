@@ -9,19 +9,19 @@ int work[WORKER_NUM+1];
 int work_size[WORKER_NUM+1] = {0, 130, 60, 100, 200, 140, 60, 50, 60};
 
 void check(){
-    printf("作业分配情况\n");
+    printf("作业分配情况: \n");
     for (int i = 0; i <= WORKER_NUM; ++i) {
         if (work[i] != -1){
-            printf("作业%d正在工作，地址为%d，已分配%dKB空间\n", i, work[i], work_size[i]);
+            printf("\t作业%d正在工作，地址为%d，已分配%dKB空间\n", i, work[i], work_size[i]);
         }
     }
-    printf("\n空闲内存分区链情况\n");
+    printf("空闲内存分区链情况: \n");
     struct free_partition *p = head->next;
     while(p){
-        printf("%3d-%3d free\n", p->address, p->address + p->size - 1);
+        printf("\t%3d-%3d free\n", p->address, p->address + p->size - 1);
         p = p->next;
     }
-    printf("\n");
+    printf("\n\n");
 }
 
 void first(){
@@ -50,7 +50,6 @@ void first(){
     check();
     work[8] = allocate_first(work_size[8]);
     check();
-    memory_trunc();
 //    work[0] = allocate_first(1000);
 //    check();
 }
@@ -81,7 +80,7 @@ void best(){
     check();
     work[8] = allocate_best(work_size[8]);
     check();
-    memory_trunc();
+
 //    work[0] = allocate_best(1000);
 //    check();
 }
@@ -94,6 +93,11 @@ void init(){
 }
 int main(){
     init();
+	printf("首次适应算法\n");
     first();
+    memory_trunc();
+	init();
+	printf("\n最佳适应算法\n");
     best();
+    memory_trunc();
 }
